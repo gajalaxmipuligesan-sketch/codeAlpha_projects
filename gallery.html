@@ -1,0 +1,138 @@
+<!DOCTYPE html><meta name="viewport" content="width=device-width,initial-scale=1.0"><head>
+<title>Gallery</title>
+<link rel="icon" href="cosmos-flowers_1373-83.avif">
+<center>
+    <h1>Image Gallery</h1>
+
+</center>
+<hr>
+<div><input type="text" id="search"placeholder="Search images..."onkeyup="searchImages()">
+<button>Submit</button></div>   
+<h2>Category Filter</h2> 
+<button onclick="filterImages('all')">All</button>
+<button onclick="filterImages('animals')">Animals</button>
+<button onclick="filterImages('birds')">Birds</button>
+<button onclick="filterImages('foods')">Foods</button>
+<button onclick="filterImages('flowers')">Flowers</button>
+<br><br><br><hr>
+<div><img src="wolfgang-hasselmann-7COocBblpyE-unsplash.jpg" class="gallery" data-category="animals" alt="elephant"width="100px">
+<img src="images.jpg" class="gallery" data-category="animals" alt="tiger" width="100px">
+<img src="zdenek-machacek-OlKkCmToXEs-unsplash.jpg" class="gallery" data-category="birds" alt="parrot"width="100px">
+<img src="hans-veth-XYFpx1ErGOU-unsplash.jpg" class="gallery" data-category="birds" alt="peacock"width="100px">
+
+<img src="simona-sergi-x4pYSbKPtzA-unsplash.jpg" class="gallery" data-category="flowers" alt="tulip"width="100px">
+<img src="sarah-janes-pFs-AhIEBlw-unsplash.jpg" class="gallery" data-category="flowers"alt="lavender"width="100px">
+
+<img src="fatima-akram-uU0Anw-8Vsg-unsplash.jpg" class="gallery" data-category="foods" alt="pizza"width=100px>
+<img src="david-foodphototasty-E94j3rMcxlw-unsplash.jpg" class="gallery" data-category="foods"alt="burgar" width="100px"></div>
+
+<style>
+    .gallery{
+        width: 180px;
+        height: 250px;
+        object-fit: cover;
+        margin: 10px;
+        
+        
+    }
+    .gallery-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap:20px;
+    }
+    /*.zoom{
+        transform: scale(1.5);
+        transition: transform 0.3s ease;
+    }*/
+    .gallery.fullscreen{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: 9999;
+        margin: 0;
+    }
+    .gallery-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    .gallery{
+        width: 220px;
+        height: 250px;
+        object-fit: cover;
+    }
+    @media(max-width:768px){
+        .gallery{
+            width: 90%;
+            height: auto;
+        }
+        button{
+            width: 90%;
+            margin: 5px;
+
+        }
+        input{
+            width:90%;
+        }
+        h1{
+            font-size: 28px;
+        }
+    }
+      button{
+        background-color: black;
+        color: white;
+        width: 100px;
+        border: 2px;
+        border-color: black;  
+        padding: 5px;
+        margin: 5px;
+        cursor: pointer;
+    }
+        body{
+            background-color: aliceblue;
+        }
+        button:hover {
+            background-color: white;
+            color: black;
+        }
+</style>
+<script>
+    function filterImages(category)
+    {
+        let images=document.querySelectorAll(".gallery");
+        images.forEach(function(image){
+            if(category=="all" || image.dataset.category==category){
+                image.style.display="block";
+            }
+            else{
+                image.style.display="none";
+            }
+            }
+        );
+    }
+   let images=document.querySelectorAll(".gallery");
+   images.forEach(function(image){
+    image.addEventListener("click",function(){
+        image.classList.toggle("fullscreen");
+    });
+   });
+   function searchImages(){
+    let input=document.getElementById("search").value.toLowerCase();
+    let images=document.querySelectorAll(".gallery");
+    images.forEach(function(image){
+        let name=image.alt.toLowerCase();
+        if(name.includes(input)){
+            image.style.display="block";
+
+        }
+        else{
+            image.style.display="none";
+        }
+    });
+   }
+    
+</script>
